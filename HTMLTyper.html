@@ -68,16 +68,19 @@ Copyright (C) 2006, 2012  Lee S. Barney
 		width:99.5%;
 		background-color: rgb(240,240,240);
 		opacity: .85;
+		resize: none;
 	}
 	.script_mod{
 		background-color: rgb(240,240,240);
 		opacity: .85;
 		width:99.5%;
+		resize: none;
 	}
 	.css_mod{
 		background-color: rgb(240,240,240);
 		opacity: .85;
 		width: 99.5%
+		resize: none;
 	}
 	.div_header{
 		font-style: oblique;
@@ -815,7 +818,7 @@ Copyright (C) 2006, 2012  Lee S. Barney
 		
 	</div>
 	
-		<table id=menu class=menu>
+		<table draggable='true' id=menu class=menu>
 			<tr><td><input id=sizeButton type=button class='menuButton black' value='-' onclick='resizeMenu()'/></td></tr>
 			<tr><td><input id=htmlButton type=button class='menuButton black'  value='Edit HTML' onclick='showHTML(this)'/></td></tr>
 			<tr><td><input id=jsButton type=button class='menuButton black'  value='Edit JavaScript' onclick='showJS(this)'/></td></tr>
