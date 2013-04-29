@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <!--
 HTMLTyper is a rapid prototyping tool for web pages.
 Copyright (C) 2006, 2012  Lee S. Barney
@@ -20,877 +22,115 @@ Copyright (C) 2006, 2012  Lee S. Barney
  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
 
 -->
 
-<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>HTMLTyper 1.1[Beta]  - An HTML Prototyping Tool</title>
-<style>
-	h1{
-  		text-align: center;
-	}
-	.htmlEditorDiv,.jsEditorDiv,.cssEditorDiv{
-		background: #0095cd;
-	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
-	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
-		width: 75%;
-		border: ridge;
-		display: none;
-		position: fixed;
-		opacity: .85;
-		box-shadow: 10px 10px 5px #888888;
-		border-radius:15px;
-		overflow: hidden;
-	}
-	.htmlEditorDiv{
-		
-		top: 285px;
-		left: 85px;
-	}
-	.jsEditorDiv{
-		top: 300px;
-		left: 100px;
-	}
-	.cssEditorDiv{
-		top: 315px;
-		left: 115px;
-	}
-	.editor_area{
-		width:100%;
-		background-color: rgb(250,250,250);
-		opacity: .85;
-	}
-	.html_mod{
-		width:99.5%;
-		background-color: rgb(240,240,240);
-		opacity: .85;
-		resize: none;
-	}
-	.script_mod{
-		background-color: rgb(240,240,240);
-		opacity: .85;
-		width:99.5%;
-		resize: none;
-	}
-	.css_mod{
-		background-color: rgb(240,240,240);
-		opacity: .85;
-		width: 99.5%
-		resize: none;
-	}
-	.div_header{
-		font-style: oblique;
-		font-size: 115%;
-		font-weight: bold;
-		background: #0095cd;
-		background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
-		background: -moz-linear-gradient(top,  #00adee,  #0078a5);
-		filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
-		opacity: .85;
-		padding-left: 3px;
+<title>HTMLTyper 2.0  - An HTML Prototyping Tool</title>
 
-		cursor: pointer;
-	}
-	.div_footer{
-		float: left;
-		width:95%;
-		height: 20px;
-
-		background: #0095cd;
-		background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
-		background: -moz-linear-gradient(top,  #00adee,  #0078a5);
-		filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
-	}
-	.resizer{
-		-webkit-transform: rotate(25deg); 
-		-moz-transform: rotate(25deg);	
-		transform: rotate(25deg);
-		width:40;
-		font-weight: bold;
-		font-size: 20px;
-		color:lightgrey;
-		float: right;
-		padding-right: 10px;
-		position: relative;
-		cursor: pointer;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-	.resizer:active {
-	color: #666;
-	}
-	.hidden{
-		display: none;
-	}
-	.shown{
-		display: block;
-	}
-	.menu{
-		position: fixed;
-		padding: 5px;
-		top: 200px;
-		right: 10px;
-		z-index: 10;
-		
-		background: #0095cd;
-		background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
-		background: -moz-linear-gradient(top,  #00adee,  #0078a5);
-		filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
-
-		box-shadow: 10px 10px 5px #888888;
-		border-radius:15px;
-	}
-	.menuButton {
-		min-width: 125px;
-	display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	padding: .5em 2em .55em;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	-webkit-border-radius: .5em; 
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-.menuButton:hover {
-	text-decoration: none;
-}
-.menuButton:active {
-	position: relative;
-	top: 1px;
-}
-.black {
-	color: #d7d7d7;
-	border: solid 1px #333;
-	background: #333;
-	background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
-	background: -moz-linear-gradient(top,  #666,  #000);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000');
-}
-.black:hover {
-	background: #000;
-	background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#000));
-	background: -moz-linear-gradient(top,  #444,  #000);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#000000');
-}
-.black:active {
-	color: #666;
-	background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#444));
-	background: -moz-linear-gradient(top,  #000,  #444);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#666666');
-}
-	#goDev_button{
-		position: fixed;
-		top: 2px;
-		left: 10px;
-	}
-	.spacer{
-		height: 20px;
-	}
-	#saveDialog{
-	  
-	  display: none;
-	  position: absolute;
-	  top: 1px;
-	  left: 200px;
-	  width: 240px;
-	  border: ridge;
-	  color:white;
-		
-		background: #0078a5;
-
-		box-shadow: 10px 10px 5px #888888;
-		border-radius:15px;
-	  padding-bottom:2px;
-	}
-
-	#fileList,#deleteFileList{
-	  height: 150px;
-	  background-color: white;
-	  overflow: auto;
-	  border: ridge;
-	  width: 240px;
-	}
-	#buttonBar{
-	  float: right;
-	  padding-right:10px;
-	}
-	
-	#openDialog,#deleteDialog{
-	  display: none;
-	  background-color: #000000;
-	  width: 240px;
-	  height: 188px;
-	  border: ridge;
-	  position: fixed;
-	  top: 1px;
-	  left: 250px;
-	  color:white;
-		
-		background: #0078a5;
-
-		box-shadow: 10px 10px 5px #888888;
-		border-radius:15px;
-	  padding-bottom:2px;
-	}
-	#fileListHolder,#deleteFileListHolder{
-		overflow: auto;
-	}
-	#goDev_button{
-	  background-color: lightblue;
-	}
-	.dialogHeader{
-		padding-left: 5px;
-		Color:white;
-	}
-	
-	
-</style>
+<link rel="stylesheet" type="text/css" href="typer.css">
+<script type="text/javascript" src="typer.js"></script>
 <style id='inserted_CSS'></style>
 <script id='inserted_Scripts'></script>
-<script id='base_Scripts'>
-
-	function insertTab(textarea,event) {
-	/*
-	*	this code is currently unused due to compatibility and speed issues.
-	*/
-		var tabKeyCode = 9;
-		if (event.which) // mozilla
-			var keycode = event.which;
-		else // ie
-			var keycode = event.keyCode;
-			
-		var specialKey  = event.keyCode;
-		
-		if((keycode != 9 && keycode < 31) || (specialKey >= 37 && specialKey <=40) || (specialKey >= 63232 && specialKey <=632235)){
-			return true;
-		}
-		if (textarea.setSelectionRange) {
-			// mozilla
-			var s = textarea.selectionStart;
-			var e = textarea.selectionEnd;
-			if (keycode == tabKeyCode) {
-				textarea.value = textarea.value.substring(0, s) + 
-					"\t" + textarea.value.substr(e);
-			}
-			else{
-				textarea.value = textarea.value.substring(0, s) + 
-					String.fromCharCode(event.which) + textarea.value.substr(e);
-			}
-			textarea.setSelectionRange(s + 1, s + 1);
-			textarea.focus();
-		} else if (textarea.createTextRange) {
-			// ie
-			document.selection.createRange().text="\t"
-			textarea.onblur = function() { this.focus(); this.onblur = null; };
-		} else {
-			// unsupported browsers
-		}
-		if (event.returnValue) // ie ?
-			event.returnValue = false;
-		if (event.preventDefault) // dom
-			event.preventDefault();
-		
-		if(textarea.id == 'body_area'){
-			insertHTML();
-		}
-		else if(textarea.id == 'script_area'){
-			insertScript(event);
-		}
-		else if(textarea.id == 'style_area'){
-			insertCSS();
-		}
-		return false;
-	}
-
-
-	//inserting and removing the generated HTML
-	function insertHTML(){
-	   try{
-			var htmlContent = document.getElementById('body_area').value
-			document.getElementById('code_display').innerHTML = htmlContent;
-		}
-		catch(e){}
-	}
-	function clearHMTL(){
-		document.getElementById('code_display').innerHTML = '';
-	}
-	
-	//inserting and removing the generated JavaScript
-	function insertScript(){
-	  try{
-		var scriptContent = document.getElementById('script_area').value;
-		var usersScripts = document.getElementById('inserted_Scripts');
-		var scriptParent = document.getElementsByTagName('head')[0];
-		if(navigator.appName == "Microsoft Internet Explorer"){//IE
-			usersScripts.text = scriptContent; // this doesn't work for FireFox
-		}
-		else
-		{
-			scriptParent.removeChild(usersScripts);
-			usersScripts = document.createElement('script');
-			usersScripts.id = 'inserted_Scripts';
-			usersScripts.innerHTML= scriptContent;
-			scriptParent.appendChild(usersScripts);
-			
-		}
-	  }
-	  catch(e){}
-	}
-	function clearScript(){
-	  try{
-		var scriptContent = document.getElementById('script_area').value;
-		var usersScripts = document.getElementById('inserted_Scripts');
-		var scriptParent = document.getElementsByTagName('head')[0];
-		if(navigator.appName == "Microsoft Internet Explorer"){//IE
-			usersScripts.text = ''; // this doesn't work for FireFox
-		}
-		else
-		{
-			scriptParent.removeChild(usersScripts);
-			usersScripts = document.createElement('script');
-			usersScripts.id = 'inserted_Scripts';
-			scriptParent.appendChild(usersScripts);
-		}
-	  }
-	  catch(e){}
-	}
-	
-	//inserting and removing the generated CSS classes
-	function insertCSS(){
-            try{
-				var cssContent = document.getElementById('style_area').value;
-				//style.innerHTML is read only in IE
-				if(navigator.appName == "Microsoft Internet Explorer"){//IE
-					var styleParent = document.getElementsByTagName('head')[0];
-					var curCustCSS = document.getElementById('inserted_CSS');
-					if(curCustCSS != null){
-						styleParent.removeChild(curCustCSS);
-					}
-					styleParent.insertAdjacentHTML('afterBegin', "%nbsp;<style id='inserted_CSS'>"+cssContent+"</style>");
-
-				}
-				else{
-					var is_safari = (document.childNodes)&&(!document.all)&&(!navigator.taintEnabled)&&(!navigator.accentColorName)?true:false;
-					if(is_safari){
-						document.getElementById('inserted_CSS').innerText = cssContent;
-					}
-					else{
-						document.getElementById('inserted_CSS').innerHTML = cssContent;
-					}
-				}
-            }
-            catch(e){}
-	}
-	function clearCSS(){
-		 try{
-				var cssContent = document.getElementById('style_area').value;
-				//style.innerHTML is read only in IE
-				if(navigator.appName == "Microsoft Internet Explorer"){//IE
-					var styleParent = document.getElementsByTagName('head')[0];
-					var curCustCSS = document.getElementById('inserted_CSS');
-					if(curCustCSS != null){
-						styleParent.removeChild(curCustCSS);
-					}
-
-				}
-				else{
-					var is_safari = (document.childNodes)&&(!document.all)&&(!navigator.taintEnabled)&&(!navigator.accentColorName)?true:false;
-					if(is_safari){
-						document.getElementById('inserted_CSS').innerText = '';
-					}
-					else{
-						document.getElementById('inserted_CSS').innerHTML = '';
-					}
-				}
-            }
-            catch(e){}
-	}
-	function clearAll(){
-		clearCSS();
-		clearScript();
-		clearHMTL();
-		document.getElementById('body_area').value = "";
-		document.getElementById('script_area').value = "";
-		document.getElementById('style_area').value = "";
-	}
-	function showSource(){
-		var headerStr = '<!DOCTYPE html>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />\n<title>Insert title here</title>\n<style>\n';
-
-		var sourceDisplay = document.getElementById('full_source_display');
-		sourceDisplay.value = headerStr;
-		sourceDisplay.value = sourceDisplay.value + document.getElementById('style_area').value;
-		sourceDisplay.value = sourceDisplay.value + "\n<"+"/"+"style>\n<script>\n";//work around!!!!!
-		sourceDisplay.value = sourceDisplay.value + document.getElementById('script_area').value;
-		sourceDisplay.value = sourceDisplay.value + "\n<"+"/"+"script>\n<body>\n";//work around!!!!
-		sourceDisplay.value = sourceDisplay.value + document.getElementById('body_area').value;
-		sourceDisplay.value = sourceDisplay.value + "\n</body>\n</html>";
-
-		document.getElementById('builder').className = "hidden";
-		document.getElementById('full_source').className = "shown";
-	}
-
-	function showBuilder(){
-		document.getElementById('builder').className = "shown";
-		document.getElementById('full_source').className = "hidden";
-	}
-	/*
-	*	show and hide the editor elements and the associated buttons
-	*/
-	function showHTML(button){
-		button.style.display = 'none';
-		var editor = document.getElementById('html_editor');
-		bringToFront(editor);
-		editor.style.display = 'block';
-	}
-	function showJS(button){
-		button.style.display = 'none';
-		var editor = document.getElementById('jscript_editor');
-		bringToFront(editor);
-		editor.style.display = 'block';
-	}
-	function showCSS(button){
-		button.style.display = 'none';
-		var editor = document.getElementById('css_editor');
-		bringToFront(editor);
-		editor.style.display = 'block';
-	}
-	
-	function hideHTML(){
-		document.getElementById('htmlButton').style.display = 'block';
-		document.getElementById('html_editor').style.display = 'none';
-	}
-	function hideJS(){
-		document.getElementById('jsButton').style.display = 'block';
-		document.getElementById('jscript_editor').style.display = 'none';
-	}
-	function hideCSS(){
-		document.getElementById('cssButton').style.display = 'block';
-		document.getElementById('css_editor').style.display = 'none';
-	}
-	
-	/*
-	*Dragging editor code
-	*/
-	var oldMouseX = -1;
-	var oldMouseY = -1;
-	var editorToMove = null;
-	function setDragging(header, event){
-		editorToMove = header.parentNode;
-		editorToMove.style.left = editorToMove.offsetLeft+'px';
-		editorToMove.style.top = editorToMove.offsetTop+'px';
-		editorToMove.curX  = editorToMove.offsetLeft;
-		editorToMove.curY  = editorToMove.offsetTop;
-		bringToFront(editorToMove);
-		oldMouseX = event.screenX;
-		oldMouseY = event.screenY;
-	}
-	function doneDragging(){
-		editorToMove = null;
-		oldMouseX = -1;
-		oldMouseY = -1;
-	}
-	function dragIt(event){
-		if(editorToMove != null){
-			editorToMove.curX = editorToMove.curX + event.screenX - oldMouseX;
-			editorToMove.curY = editorToMove.curY + event.screenY - oldMouseY;
-			 
-			editorToMove.style.top = editorToMove.curY+'px';
-			editorToMove.style.left = editorToMove.curX+'px';
-			
-			oldMouseX = event.screenX;
-			oldMouseY = event.screenY;
-		}
-	}
-	
-	/*
-	*	resizing code
-	*/
-	var editorToResize = null;
-	var textAreaToResize = null;
-	function setResizing(resizer, event){
-		
-		editorToResize = resizer.parentNode;
-		textAreaToResize = resizer.parentNode.getElementsByTagName('textarea')[0];
-		editorToResize.curWidth  = editorToResize.offsetWidth;
-		editorToResize.style.width  = editorToResize.offsetWidth+'px';
-		
-		textAreaToResize.curHeight  = textAreaToResize.offsetHeight;
-		textAreaToResize.style.height  = textAreaToResize.offsetHeight+'px';
-		
-		
-		bringToFront(editorToResize);
-		oldMouseX = event.screenX;
-		oldMouseY = event.screenY;
-	
-	}
-	
-	function doneResizing(){
-	
-		editorToResize = null;
-		oldMouseX = -1;
-		oldMouseY = -1;
-	
-	}
-	function resizeIt(event){
-		if(editorToResize != null){
-				
-			editorToResize.curWidth = editorToResize.curWidth + event.screenX - oldMouseX;
-			if(editorToResize.curWidth <= 150){
-				doneResizing();
-				editorToResize.curWidth = 150;
-			}
-			editorToResize.style.width = editorToResize.curWidth+'px';
-			textAreaToResize.curHeight = textAreaToResize.curHeight + event.screenY - oldMouseY;
-			if(textAreaToResize.curHeight <=1){
-				doneResizing();
-				textAreaToResize.curHeight = 1;
-			}
-			textAreaToResize.style.height = textAreaToResize.curHeight+'px';
-			
-			oldMouseX = event.screenX;
-			oldMouseY = event.screenY;
-		}
-	}
-	
-	function bringToFront(editor){
-		for(var i = 0; i < editors.length; i++){
-			if(editors[i] == editor){
-				editor.style.zIndex = 102;
-				continue;
-			}
-			if(editors[i].style.zIndex >= 100){
-				editors[i].style.zIndex = editors[i].style.zIndex -1;
-			}
-		}
-	}
-	function selectEditor(textArea){
-		bringToFront(textArea.parentNode);
-	}
-	
-	function resizeMenu(){
-		var menu = document.getElementById('menu');
-		if(menu.isMinimized){
-			var buttonWidth = '125px';
-			menuButtons[0].value = '-';
-			menuButtons[0].style.minWidth = buttonWidth;
-			
-			menuButtons[1].value = 'Add HTML';
-			menuButtons[1].style.minWidth = buttonWidth;
-			
-			menuButtons[2].value = 'Add JavaScript';
-			menuButtons[2].style.minWidth = buttonWidth;
-			
-			menuButtons[3].value = 'Add CSS';
-			menuButtons[3].style.minWidth = buttonWidth;
-			
-			menuButtons[4].value = 'Clear All';
-			menuButtons[4].style.minWidth = buttonWidth;
-			
-			menuButtons[5].value = 'Show Source';
-			menuButtons[5].style.minWidth = buttonWidth;
-			
-			menuButtons[6].value = 'Open File';
-			menuButtons[6].style.minWidth = buttonWidth;
-			
-			menuButtons[7].value = 'Save File';
-			menuButtons[7].style.minWidth = buttonWidth;
-			
-			menuButtons[8].value = 'Save File As';
-			menuButtons[8].style.minWidth = buttonWidth;
-			
-			menuButtons[9].value = 'Delete File';
-			menuButtons[9].style.minWidth = buttonWidth;
-			
-			menu.isMinimized = false;
-		}
-		else{
-			var buttonWidth = '50px';
-			menuButtons[0].value = '+';
-			menuButtons[0].style.minWidth = buttonWidth;
-			
-			menuButtons[1].value = 'AH';
-			menuButtons[1].style.minWidth = buttonWidth;
-			
-			menuButtons[2].value = 'AJ';
-			menuButtons[2].style.minWidth = buttonWidth;
-			
-			menuButtons[3].value = 'AC';
-			menuButtons[3].style.minWidth = buttonWidth;
-			
-			menuButtons[4].value = 'CA';
-			menuButtons[4].style.minWidth = buttonWidth;
-			
-			menuButtons[5].value = 'SS';
-			menuButtons[5].style.minWidth = buttonWidth;
-			
-			menuButtons[6].value = 'OF';
-			menuButtons[6].style.minWidth = buttonWidth;
-			
-			menuButtons[7].value = 'SF';
-			menuButtons[7].style.minWidth = buttonWidth;
-			
-			menuButtons[8].value = 'SFA';
-			menuButtons[8].style.minWidth = buttonWidth;
-			
-			menuButtons[9].value = 'DF';
-			menuButtons[9].style.minWidth = buttonWidth;
-			
-			
-			menu.isMinimized = true;
-		}
-	}
-	function resizeOrDrag(event){
-		
-		if(editorToMove != null){
-			dragIt(event);
-		}
-		if(textAreaToResize != null){
-			resizeIt(event);
-		}
-	}
-	function doneResizingOrDragging(event){
-		
-		if(editorToMove != null){
-			doneDragging();
-		}
-		if(editorToResize != null){
-			doneResizing();
-		}
-	}
-	
-	var editors = new Array();
-	var menuButtons = new Array();
-	function setUp(){
-		
-		editors[0] = document.getElementById('html_editor');
-		editors[1] = document.getElementById('jscript_editor');
-		editors[2] = document.getElementById('css_editor');
-		
-		menuButtons[0] = document.getElementById('sizeButton');
-		menuButtons[1] = document.getElementById('htmlButton');
-		menuButtons[2] = document.getElementById('jsButton');
-		menuButtons[3] = document.getElementById('cssButton');
-		menuButtons[4] = document.getElementById('clearButton');
-		menuButtons[5] = document.getElementById('showButton');
-		menuButtons[6] = document.getElementById('openButton');
-		menuButtons[7] = document.getElementById('saveButton');
-		menuButtons[8] = document.getElementById('saveAsButton');
-		menuButtons[9] = document.getElementById('deleteButton');
-		clearAll();
-		
-			document.getElementById('code_display').innerHTML = '<h1>Welcome to HTMLTyper</h1>'+
-				'Use the buttons on the bar to the right to show the HTML, CSS, and JavaScript addition '+
-				'sub-windows.<br /><br />As you type in your source, the effect will be instantly available '+
-				'in the main body of the page.<br /><br />Enjoy!'+
-				'<br/><br/>PS. HTMLTyper has not been tested against Interent Explorer.';
-		
-	}
-	
-	
-	
-	var newLineSequence = '-NeW_lInE-';
-	function showOpenDialog(){
-		document.getElementById('saveDialog').style.display = 'block';
-	}
-	
-	
-	/*
-	*	Store HTML, CSS, and JavaScript in local storage
-	*/
-	var htPrefix = 'h_t_';
-	var curFileName = null;
-	function saveFile(shouldSaveAs) {
-		if(curFileName == null || shouldSaveAs){
-			var fileName=window.prompt("Save File: ");
-			if(fileName == null){
-				return;
-			}
-			curFileName = fileName;
-		}
-		var codeArray = {
-			'HTML': escape(document.getElementById('body_area').value),
-			'JS': escape(document.getElementById('script_area').value),
-			'CSS': escape(document.getElementById('style_area').value)
-		}
-		localStorage.setItem(htPrefix+curFileName, JSON.stringify(codeArray));
-	}
-	
-	function openFile(){
-		
-		var selector = document.getElementById('fileList');
-		for(var retrievedFileName in localStorage){
-			if(retrievedFileName.indexOf(htPrefix) == 0){
-				retrievedFileName = retrievedFileName.substring(4);
-				var anOption = document.createElement('option');
-				anOption.value = retrievedFileName;
-				anOption.innerText = retrievedFileName;
-				selector.appendChild(anOption);
-			}
-		}
-		document.getElementById('openDialog').style.display = 'block';
-	}
-
-	function readFile(aButton) {
-		var selector = document.getElementById('fileList');
-		document.getElementById('openDialog').style.display = 'none';
-		clearAll();
-		if(aButton.value == 'Open'){
-		
-			/*
-			*	get the name of the selected file
-			*/
-			if(selector.selectedIndex >=0){
-				var name = selector.options[selector.selectedIndex].value;
-				curFileName = name;
-
-				var storedData = JSON.parse(localStorage[htPrefix+curFileName]);
-				if(storedData.HTML){
-					document.getElementById('body_area').value = unescape(storedData.HTML);
-					insertHTML();
-				}
-				if(storedData.JS){
-					document.getElementById('script_area').value = unescape(storedData.JS);
-					insertScript();
-				}
-				if(storedData.CSS){
-					document.getElementById('style_area').value = unescape(storedData.CSS);
-					insertCSS();
-				}
-			}
-		}
-		document.getElementById('openDialog').style.display = 'none';
-		selector.innerHTML = '';
-	}
-	function showDeleteDialog(){
-		document.getElementById('deleteDialog').style.display = 'block';
-		var selector = document.getElementById('deleteFileList');
-		selector.innerHTML = '';
-
-		for(var retrievedFileName in localStorage){
-			if(retrievedFileName.indexOf(htPrefix) == 0){
-				retrievedFileName = retrievedFileName.substring(4);
-				var anOption = document.createElement('option');
-				anOption.value = retrievedFileName;
-				anOption.innerText = retrievedFileName;
-				selector.appendChild(anOption);
-			}
-		}
-	}
-	function deleteFiles(aButton) {
-		document.getElementById('deleteDialog').style.display = 'none';
-		
-		if(aButton.value == 'Delete'){
-			
-			var selector = document.getElementById('deleteFileList');
-			var name = selector.options[selector.selectedIndex].value;
-			localStorage.removeItem(htPrefix+name);
-			if(curFileName == name){
-				clearAll();
-				curFileName = null;
-			}
-		}
-	}
-
-
-
-</script>
 </head>
-<body id=mainBody onload='setUp()' onmousemove='resizeOrDrag(event)' onmouseup='doneResizingOrDragging(event)'>
-  <noscript>
-	<p>It appears that your browser has JavaScript disabled.  To use this application you must enable JavaScript.  
-	<br/>To find out how to do so please consult the 'help' pull-down menu of your browser.
-	</p>
-  </noscript>
-  <div id='builder' onmousemove='resizeOrDrag(event)' onmouseup='doneResizingOrDragging(event)'>
-	<div id=code_display>
-		
+<body onload='setUp()'>
+
+	<h1 class='robbieHeader'>HTMLTyper<span class="sub">2.0</span></h1>
+  	<noscript>
+		<p>It appears that your browser has JavaScript disabled.  To use this application you must enable JavaScript.  
+		<br/>To find out how to do so please consult the 'help' pull-down menu of your browser.
+		</p>
+  	</noscript>
+  	<div id="display" onclick='checkedHideAll(event)'></div>
+	<div id='openDialog'>
+		  <div class='dialogHeader'>Open File</div>
+		  <div id='fileListHolder'>
+			<select id='fileList' size=5></select>
+
+		  </div>
+		  <div id='buttonBar' >
+			<input type='button' value='Cancel' onclick="readFile(this)" /><input type='button' value='Open' onclick='readFile(this)' />
+		  </div>
 	</div>
-	
-		<table draggable='true' id=menu class=menu>
-			<tr><td><input id=sizeButton type=button class='menuButton black' value='-' onclick='resizeMenu()'/></td></tr>
-			<tr><td><input id=htmlButton type=button class='menuButton black'  value='Edit HTML' onclick='showHTML(this)'/></td></tr>
-			<tr><td><input id=jsButton type=button class='menuButton black'  value='Edit JavaScript' onclick='showJS(this)'/></td></tr>
+	<div id='openDialog'>
+		  <div class='dialogHeader'>Open File</div>
+		  <div id='fileListHolder'>
+			<select id='fileList' size=5></select>
 
-			<tr><td><input id=cssButton type=button class='menuButton black'  value='Edit CSS' onclick='showCSS(this)'/></td></tr>
-			<tr><td><hr /></td></tr>
-			<tr><td><input id=clearButton type='button' class='menuButton black'   value='Clear All' onclick='clearAll()'/></td></tr>
-			<tr><td><input id =showButton type='button' class='menuButton black'  value='Show Source' onclick='showSource()'/></td></tr>
-			<tr><td><input id =openButton type='button' class='menuButton black'  value='Open' onclick='openFile()'/></td></tr>
-			<tr><td><input id =saveButton type='button' class='menuButton black'  value='Save' onclick='saveFile()'/></td></tr>
-			<tr><td><input id =saveAsButton type='button' class='menuButton black'  value='Save As' onclick='saveFile(true)'/></td></tr>
-			<tr><td><input id =deleteButton type='button' class='menuButton black'  value='Delete File' onclick='showDeleteDialog()'/></td></tr>
+		  </div>
+		  <div id='buttonBar' >
+			<input type='button' value='Cancel' onclick="readFile(this)" /><input type='button' value='Open' onclick='readFile(this)' />
+		  </div>
+	</div>
+	<div id='deleteDialog'>
+		  <div class='dialogHeader'>Delete File</div>
 
-		</table>
+		  <div id='deleteFileListHolder'>
+			<select id='deleteFileList' size=5></select>
+		  </div>
+		  <div id=buttonBar >
+			<input type='button' value='Cancel' onclick='deleteFiles(this)' /><input type='button' value='Delete' onclick='deleteFiles(this)' />
+		  </div>
+	</div>
+		<!-- toolbar -->
+	<div id="buttons">
+		<div id="tools" class="leftFloat">
+				<div class='menuButton black'
+					onclick="clearCode()">
+					<img src="clear.png" alt="Clear"/><br>Clear
+				</div>
+				<div class='menuButton black'
+					onclick="saveFile()">
+					<img src="save.png" alt="Save"/><br>Save
+				</div>
+				<div class='menuButton black'
+					onclick="saveFile(true)">
+					<img src="save_as.png" alt="Save As"/><br>Save As
+				</div>
+				<div class='menuButton black'
+					onclick="openFile()">
+					<img src="load.png" alt="Load"/><br>Load
+				</div>
+				<div class='menuButton black'
+					onclick="showDeleteDialog(this)">
+					<img src="delete.png" alt="Delete"/><br>Delete
+				</div>
+				<div class='menuButton orange'
+					onclick="showHTML()">
+					<img src="html5.png" alt="HTML"/><br>HTML
+				</div>
+				<div class='menuButton orange'
+					onclick="showJS()">
+					<img src="js.png" alt="JavaScript"/><br>JavaScript
+				</div>
 
-	
-	<!-- The editor areas -->
-	<div id=html_editor class=htmlEditorDiv onmousemove='resizeIt(event)'>
-		<div id=htmlHeader class=div_header onmousedown='setDragging(this, event)' onmouseup='doneDragging()' onmousemove='dragIt(event)'>HTML&nbsp;&nbsp;&nbsp;<input value=Hide type=button class='menuButton black'   onclick='hideHTML()'/></div>
-		<textarea class=html_mod id='body_area' wrap=off onkeyup='insertHTML()'  onclick='selectEditor(this)' onmousemove='resizeIt(event)' rows='10'></textarea>
-		<div class='resizer' onmousedown='setResizing(this, event)' onmousemove='resizeIt(event)' onmouseup='doneResizing()' onmouseout='resizeIt(event)'>&gt;&gt;&gt;</div>
+				<div class='menuButton orange'
+					onclick="showCSS()">
+					<img src="CSS3.png" alt="CSS"/><br>CSS
+				</div>
 		</div>
+		<div id='editors'>
+			<div id='html_editor' class='htmlEditorDiv'>
+				<div id='htmlHeader' class='div_header'>&lt;body&gt;</div>
+				<textarea class='editor' id='body_area' wrap='off' onkeyup='insertHTML()' onclick='stopBubbleUp(event)'></textarea>
+				<div>&lt;/body&gt;</div>
+			</div>
 
-	<div id=jscript_editor class=jsEditorDiv onmousemove='resizeIt(event)'>
-		<div id=jsHeader class=div_header onmousedown='setDragging(this, event)' onmouseup='doneDragging()' onmousemove='dragIt(event)'>JavaScript&nbsp;&nbsp;&nbsp;<input value=Hide type=button class='menuButton black'   onclick='hideJS()'/></div>
+			<div id='jscript_editor' class='jsEditorDiv'>
+				<div id='jsHeader' class='div_header' >&lt;script&gt;</div>
+				<textarea class='editor' id='script_area' wrap='off' onkeyup='insertScript()' onclick='stopBubbleUp(event)'></textarea>
+				<div>&lt;/script&gt;</div>
+			</div>
 
-		<textarea id=script_area wrap=off onkeyup='insertScript()' onclick='selectEditor(this)' onmousemove='resizeOrDrag(event)' rows='10'class=script_mod></textarea>
-		<div class='resizer' onmousedown='setResizing(this, event)' onmousemove='resizeIt(event)' onmouseup='doneResizing()'>&gt;&gt;&gt;</div>
+			<div id='css_editor' class='cssEditorDiv'>
+				<div id= 'cssHeader' class='div_header'>&lt;link&gt;</div>
+				<textarea class='editor' id='style_area' wrap='off' onkeyup='insertCSS()' onclick='stopBubbleUp(event)'></textarea>
+				<div>&lt;/link&gt;</div>
+			</div>
 		</div>
-
-	<div id=css_editor class=cssEditorDiv onmousemove='resizeIt(event)'>
-		<div id= cssHeader class=div_header onmousedown='setDragging(this, event)' onmouseup='doneDragging()' onmousemove='dragIt(event)'>CSS&nbsp;&nbsp;&nbsp;<input value=Hide type=button class='menuButton black'  onclick='hideCSS()'/></div>
-
-		<textarea id=style_area wrap=off onkeyup='insertCSS()' onclick='selectEditor(this)' onmousemove='resizeIt(event)' rows='10'class=css_mod></textarea>
-		<div class='resizer' onmousedown='setResizing(this, event)' onmousemove='resizeIt(event)' onmouseup='doneResizing()' onmouseout='resizeIt(event)'>&gt;&gt;&gt;</div>
-
-		</div>
-  </div> <!-- end of builder -->	
-	
-	<!-- the next div is for showing the source -->
-	
-	<div id=full_source class=hidden>
-		<div class='menuButton black' onclick='showBuilder()'>Show Prototyper</div>
-		<textarea id='full_source_display' readonly wrap=off rows='150'class='script_mod'></textarea>
 	</div>
-
-	
-	<!-- some dialog boxes -->
-	<div id=openDialog>
-	  <div class='dialogHeader'>Open File</div>
-	  <div id=fileListHolder>
-		<select id=fileList size=5></select>
-
-	  </div>
-	  <div id=buttonBar >
-		<input type=button value=Cancel onclick=readFile(this) /><input type=button value=Open onclick=readFile(this) />
-	  </div>
-
-	</div>
-	<div id=deleteDialog>
-	  <div class='dialogHeader'>Delete File</div>
-
-	  <div id=deleteFileListHolder>
-		<select id=deleteFileList size=5></select>
-	  </div>
-	  <div id=buttonBar >
-
-		<input type=button value=Cancel onclick=deleteFiles(this) /><input type=button value=Delete onclick=deleteFiles(this) />
-	  </div>
-
-	</div>
-	
 
 </body>
 </html>
