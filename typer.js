@@ -28,12 +28,7 @@ function stopBubbleUp(event){
 
 function checkedHideAll(event){
 	event = event ? event : window.event;
-	if(event.target == display){
-		hideAll();
-	}
-	else{
-		stopBubbleUp(event);
-	}
+	stopBubbleUp(event);
 }
 
 function insertTab(textarea,event) {
@@ -89,12 +84,11 @@ function insertTab(textarea,event) {
 		return false;
 	}
 
-
 	//inserting and removing the generated HTML
 	function insertHTML(){
 	   try{
 			var htmlContent = document.getElementById('body_area').value
-			display.innerHTML = htmlContent;
+			display.innerHTML = htmlContent.replace(/(\r\n|\n|\r)/gm,"");
 		}
 		catch(e){}
 	}
@@ -202,6 +196,8 @@ function insertTab(textarea,event) {
 		document.getElementById('style_area').value = "";
 	}
 	function showSource(){
+		
+		document.getElementById('sourceDisplayer').style.left = '0px';
 		var headerStr = '<!DOCTYPE html>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />\n<title>Insert title here</title>\n<style>\n';
 
 		var sourceDisplay = document.getElementById('full_source_display');
