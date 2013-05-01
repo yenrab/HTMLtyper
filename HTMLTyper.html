@@ -36,116 +36,114 @@ Copyright (C) 2006, 2012  Lee S. Barney
 <script id='inserted_Scripts'></script>
 </head>
 <body onload='setUp()' onclick='hideAll()'>
-	<div class='fullScreen'>
-		<div class='fullScreen' id='editingDisplay'>
-			<h1 class='robbieHeader'>HTMLTyper<span class="sub">2.0</span></h1>
-		  	<noscript>
-				<p>It appears that your browser has JavaScript disabled.  To use this application you must enable JavaScript.  
-				<br/>To find out how to do so please consult the 'help' pull-down menu of your browser.
-				</p>
-		  	</noscript>
-		  	<div id="display" onclick='stopBubbleUp(event)'></div>
-			<div id='openDialog'>
-				  <div class='dialogHeader'>Open File</div>
-				  <div id='fileListHolder'>
-					<select id='fileList' size=5></select>
+	<div class='viewPort fitParent' >
+		<h1 class='robbieHeader'>HTMLTyper<span class="sub">2.0</span></h1>
+	  	<noscript>
+			<p>It appears that your browser has JavaScript disabled.  To use this application you must enable JavaScript.  
+			<br/>To find out how to do so please consult the 'help' pull-down menu of your browser.
+			</p>
+	  	</noscript>
+	  	<div id="display" class='display' onclick='stopBubbleUp(event)'></div>
+	  	<div id="sourceDisplayer" class='display allSourceDisplay viewPort'>
+			<textarea class='displayer fitParent' id='all_source_area' wrap='off' readonly='true'onclick='stopBubbleUp(event)'>fda</textarea>
+		</div>
+  	</div>
+	<div id='openDialog'>
+		  <div class='dialogHeader'>Open File</div>
+		  <div id='fileListHolder'>
+			<select id='fileList' size=5></select>
 
-				  </div>
-				  <div id='buttonBar' >
-					<input type='button' value='Cancel' onclick="readFile(this)" /><input type='button' value='Open' onclick='readFile(this)' />
-				  </div>
-			</div>
-			<div id='openDialog'>
-				  <div class='dialogHeader'>Open File</div>
-				  <div id='fileListHolder'>
-					<select id='fileList' size=5></select>
+		  </div>
+		  <div id='buttonBar' >
+			<input type='button' value='Cancel' onclick="readFile(this)" /><input type='button' value='Open' onclick='readFile(this)' />
+		  </div>
+	</div>
+	<div id='openDialog'>
+		  <div class='dialogHeader'>Open File</div>
+		  <div id='fileListHolder'>
+			<select id='fileList' size=5></select>
 
-				  </div>
-				  <div id='buttonBar' >
-					<input type='button' value='Cancel' onclick="readFile(this)" /><input type='button' value='Open' onclick='readFile(this)' />
-				  </div>
-			</div>
-			<div id='deleteDialog'>
-				  <div class='dialogHeader'>Delete File</div>
+		  </div>
+		  <div id='buttonBar' >
+			<input type='button' value='Cancel' onclick="readFile(this)" /><input type='button' value='Open' onclick='readFile(this)' />
+		  </div>
+	</div>
+	<div id='deleteDialog'>
+		  <div class='dialogHeader'>Delete File</div>
 
-				  <div id='deleteFileListHolder'>
-					<select id='deleteFileList' size=5></select>
-				  </div>
-				  <div id=buttonBar >
-					<input type='button' value='Cancel' onclick='deleteFiles(this)' /><input type='button' value='Delete' onclick='deleteFiles(this)' />
-				  </div>
-			</div>
-				<!-- toolbar -->
-			<div id="buttons">
-				<div id="tools" class="leftFloat">
-						<div class='menuButton black'
-							onclick="clearAll()">
-							<img src="clear.png" alt="Clear"/><br>Clear
-						</div>
-						<div class='menuButton black'
-							onclick="saveFile()">
-							<img src="save.png" alt="Save"/><br>Save
-						</div>
-						<div class='menuButton black'
-							onclick="saveFile(true)">
-							<img src="save_as.png" alt="Save As"/><br>Save As
-						</div>
-						<div class='menuButton black'
-							onclick="openFile()">
-							<img src="load.png" alt="Load"/><br>Load
-						</div>
-						<div class='menuButton black'
-							onclick="showDeleteDialog(this)">
-							<img src="delete.png" alt="Delete"/><br>Delete
-						</div>
-
-						<div class='menuButton black'
-							onclick="showSource()">
-							<img src="source.png" alt="Page Source"/><br>Page Source
-						</div>
-						<div class='menuButton orange'
-							onclick="showHTML()">
-							<img src="html5.png" alt="HTML"/><br>HTML
-						</div>
-						<div class='menuButton orange'
-							onclick="showJS()">
-							<img src="js.png" alt="JavaScript"/><br>JavaScript
-						</div>
-
-						<div class='menuButton orange'
-							onclick="showCSS()">
-							<img src="CSS3.png" alt="CSS"/><br>CSS
-						</div>
+		  <div id='deleteFileListHolder'>
+			<select id='deleteFileList' size=5></select>
+		  </div>
+		  <div id=buttonBar >
+			<input type='button' value='Cancel' onclick='deleteFiles(this)' /><input type='button' value='Delete' onclick='deleteFiles(this)' />
+		  </div>
+	</div>
+<!-- toolbar -->
+	<div id='editorButtons' class="buttons">
+		<div id="tools">
+				<div class='menuButton black'
+					onclick="clearAll()">
+					<img src="clear.png" alt="Clear"/><br>Clear
 				</div>
-				<div id='editors'>
-					<div id='html_editor' class='htmlEditorDiv'>
-						<div id='htmlHeader' class='div_header'>&lt;body&gt;</div>
-						<textarea class='editor' id='body_area' wrap='off' onkeyup='insertHTML()' onclick='stopBubbleUp(event)'></textarea>
-						<div>&lt;/body&gt;</div>
-					</div>
-
-					<div id='jscript_editor' class='jsEditorDiv'>
-						<div id='jsHeader' class='div_header' >&lt;script&gt;</div>
-						<textarea class='editor' id='script_area' wrap='off' onkeyup='insertScript()' onclick='stopBubbleUp(event)'></textarea>
-						<div>&lt;/script&gt;</div>
-					</div>
-
-					<div id='css_editor' class='cssEditorDiv'>
-						<div id= 'cssHeader' class='div_header'>&lt;link&gt;</div>
-						<textarea class='editor' id='style_area' wrap='off' onkeyup='insertCSS()' onclick='stopBubbleUp(event)'></textarea>
-						<div>&lt;/link&gt;</div>
-					</div>
+				<div class='menuButton black'
+					onclick="saveFile()">
+					<img src="save.png" alt="Save"/><br>Save
 				</div>
-			</div>
+				<div class='menuButton black'
+					onclick="saveFile(true)">
+					<img src="save_as.png" alt="Save As"/><br>Save As
+				</div>
+				<div class='menuButton black'
+					onclick="openFile()">
+					<img src="load.png" alt="Load"/><br>Load
+				</div>
+				<div class='menuButton black'
+					onclick="showDeleteDialog(this)">
+					<img src="delete.png" alt="Delete"/><br>Delete
+				</div>
+
+				<div class='menuButton black'
+					onclick="showSource(event)">
+					<img src="source.png" alt="Page Source"/><br>Page Source
+				</div>
+				<div class='menuButton orange'
+					onclick="showHTML(event)">
+					<img src="html5.png" alt="HTML"/><br>HTML
+				</div>
+				<div class='menuButton orange'
+					onclick="showJS(event)">
+					<img src="js.png" alt="JavaScript"/><br>JavaScript
+				</div>
+				<div class='menuButton orange'
+					onclick="showCSS(event)">
+					<img src="CSS3.png" alt="CSS"/><br>CSS
+				</div>
+		</div>
+	</div>
+
+	<div id='editors'>
+		<div id='html_editor' class='htmlEditorDiv'>
+			<div id='htmlHeader' class='div_header'>&lt;body&gt;</div>
+			<textarea class='editor' id='body_area' wrap='off' onkeydown='handleTabs(event)' onkeyup='insertHTML(event)' onclick='stopBubbleUp(event)'></textarea>
+			<div>&lt;/body&gt;</div>
 		</div>
 
-		<div class='fullScreen allSourceDisplay' id='sourceDisplayer' onclick='stopBubbleUp(event)'>
-			<textarea class='displayer' id='all_source_area' wrap='off' readonly='true'></textarea>
-			<div class='menuButton black'
-			onclick="hideSource()">
-			<img src="editor.png" alt="Editor"/><br>Editor
+		<div id='jscript_editor' class='jsEditorDiv'>
+			<div id='jsHeader' class='div_header' >&lt;script&gt;</div>
+			<textarea class='editor' id='script_area' wrap='off' onkeydown='handleTabs(event)' onkeyup='insertScript(event)' onclick='stopBubbleUp(event)'></textarea>
+			<div>&lt;/script&gt;</div>
 		</div>
-</div>
+
+		<div id='css_editor' class='cssEditorDiv'>
+			<div id= 'cssHeader' class='div_header'>&lt;style&gt;</div>
+			<textarea class='editor' id='style_area' wrap='off' onkeydown='handleTabs(event)' onkeyup='insertCSS(event)' onclick='stopBubbleUp(event)'></textarea>
+			<div>&lt;/style&gt;</div>
+		</div>
+	</div>
+	<div id='sourceDisplayButtons' class="buttons">
+		<div class='menuButton black' onclick="hideSource()">
+			<img src="editor.png" alt="Editor"/><br>Show Editor
+		</div>
 	</div>
 </body>
 </html>
