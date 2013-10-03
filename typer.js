@@ -283,14 +283,19 @@ function showSource(){
 	document.getElementById('sourceDisplayer').style.left = '0%';
 	document.getElementById('editorButtons').style.bottom = '-80px';
 	document.getElementById('sourceDisplayButtons').style.bottom = '10px';
-	var headerStr = '<!DOCTYPE html>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />\n<title>Insert title here</title>\n<style>\n';
+	var headerStr = '<!DOCTYPE html>\n'
+	+'<html lang="en-us">\n'
+	+'<head>\n'
+	+'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />\n'
+	
+	+'\n<title>Insert title here</title>\n<style>\n';
 
 	var sourceDisplay = document.getElementById('all_source_area');
 	sourceDisplay.value = headerStr;
 	sourceDisplay.value = sourceDisplay.value + document.getElementById('style_area').value;
 	sourceDisplay.value = sourceDisplay.value + "\n<"+"/"+"style>\n<script>\n";//work around!!!!!
 	sourceDisplay.value = sourceDisplay.value + document.getElementById('script_area').value;
-	sourceDisplay.value = sourceDisplay.value + "\n<"+"/"+"script>\n<body>\n";//work around!!!!
+	sourceDisplay.value = sourceDisplay.value + "\n<"+"/"+"script>\n</head>\n<body>\n";//work around!!!!
 	sourceDisplay.value = sourceDisplay.value + document.getElementById('body_area').value;
 	sourceDisplay.value = sourceDisplay.value + "\n</body>\n</html>";
 }
