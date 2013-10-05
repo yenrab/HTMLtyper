@@ -24,7 +24,7 @@ Copyright (C) 2006, 2012  Lee S. Barney
  var editors = [];
 var display = null;
 function setUp(){
-	display = document.getElementById('display');
+	display = document.getElementById('httydisplay');
 	editors[0] = document.getElementById('html_editor');
 	editors[1] = document.getElementById('jscript_editor');
 	editors[2] = document.getElementById('css_editor');
